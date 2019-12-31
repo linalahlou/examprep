@@ -1,0 +1,45 @@
+#include <iostream>
+using namespace std;
+
+char printBoard (char board[3][3]);
+bool areCordValid (int row, int col);
+
+int main () { 
+  int row, col=1;
+  int count=0;
+  char board[3][3]={' ',' ',' ',' ',' ',' ',' ',' ',' '};
+  printBoard(board);
+  
+   while (count<9) {
+    cout << "Enter row (1-3): " << endl;
+    cin >> row;
+    cout << "Enter column (1-3): " << endl;
+    cin >> col;
+    if (areCordValid(row, col)) {
+    board [row-1][col-1]='A';
+    printBoard(board);
+    count++;
+    cout << count << endl;
+    }
+  }
+  return 0;
+}
+
+char printBoard(char board[3][3]) { 
+  for (int i=0; i<3; i++) {
+    cout << "\t-------\n\t";
+      for (int j=0; j<3; j++)
+        cout << "|" << board[i][j];
+        cout << "|" << endl;
+  } 
+  cout << "\t-------"<< endl;
+  return 0;
+}
+
+bool areCordValid (int row, int col) { 
+  bool isRowValid = ((row<=3) && (row>=1));
+  bool isColValid = ((col<=3) && (col>=1));
+  if (isRowValid && isColValid)
+    return true;
+  else return false;
+}
