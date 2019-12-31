@@ -1,0 +1,33 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std; 
+
+//{}
+struct compound {
+    string name; 
+    string formula;
+    double weight; 
+};
+
+int main () {
+    ifstream fin;
+    string line;
+    string name;
+    compound cmp1;
+    fin.open("compounds.sdf");
+    if (!fin.fail()) {
+        while ( getline (fin, line) ) {
+              size_t found = line.find("PUBCHEM_IUPAC_OPENEYE_NAME");
+              if (found== string::npos){
+                  continue;
+              }
+              cout << line << endl;
+              getline(fin, name);
+              cmp1.name=name;
+              cout << cmp1.name << endl;
+              break;       
+        } fin.close();
+    } else cout << "Unable to open file"; 
+    return 0;
+}
