@@ -1,0 +1,38 @@
+#include <iostream>
+#include <stdlib.h>
+using namespace std;
+
+char printBoard (char board[2][3]);
+
+int main () {
+    int row, col, count=0;
+    char board[2][3]= {' ',' ',' ',' ',' ',' '};
+    
+    while (count<6) {
+    printBoard (board);
+    cout << "Enter row (1-2):\t";
+    cin >> row;
+    cout << "Enter col (1-3):\t";
+    cin >> col;
+    board[row-1][col-1]='X';
+    count++;
+    } 
+    cout << "The board is full" << endl;
+    printBoard (board);
+    exit(0);
+    return 0;
+}
+
+char printBoard (char board[2][3]) {
+    int j=0;
+    for (int i=0; i<2; i++) {
+        //cout << i<<endl;
+        cout << "\t-------\n\t";
+        for (j=0; j<3; j++)
+        //cout << j <<endl;
+        cout << "|" << board[i][j];
+        cout << "|"<<endl;
+    }
+    cout << "\t-------\n";
+    return 0;
+}
