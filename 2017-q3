@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+char print(string line_str, int* ptr_x, int* ptr_arr);
+
+int main () {
+    string line_str = "Question 3";
+    int x=999;
+    int *ptr_x = &x ;
+    int array[5] = {5, 4, 3, 2, 1};
+    int *ptr_arr=array;
+    print(line_str, ptr_x, ptr_arr);
+    return 0;
+}
+
+char print(string line_str, int* ptr_x, int* ptr_arr) {
+    cout << line_str << endl;
+    cout << *ptr_x << endl;
+    for (int i=0; i<5; i++) {
+        cout << *(ptr_arr+i) << endl;
+    }
+    return 0;
+}
