@@ -12,7 +12,6 @@ int main () {
     print(line_str, ptr_x, ptr_arr);
     return 0;
 }
-
 char print(string line_str, int* ptr_x, int* ptr_arr) {
     cout << line_str << endl;
     cout << *ptr_x << endl;
