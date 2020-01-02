@@ -1,0 +1,71 @@
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+class Point {
+    private: 
+        double xval, yval, zval;
+    public: 
+        //initialise data members to 0
+        Point() {
+           double xval=0.0;
+           double yval=0.0;
+           double zval=0.0;
+        }
+       
+        // initilize data members (xval..) to data entered by user (x,y,z)
+        Point (double x, double y, double z) {
+            xval=x;
+            yval=y;
+            zval=z;
+        }
+
+        // accessors for each data member
+        double getX() {return xval;}
+        double getY() {return yval;}
+        double getZ() {return zval;}
+        
+        // mutators for each data member (allow for modification)
+        void setX(double x) {xval=x;}
+        void setY(double y) {yval=y;}
+        void setZ(double z) {zval=z;}
+
+        // format de l'affichage de la classe 
+        void print() {
+            cout << "("<< xval << "," << yval << "," << zval << ")"<<endl;
+        };
+        friend ostream& operator<<(ostream& out, const Point& pt);
+        friend Point operator+(Point pt1, Point pt2);
+        Point& operator= (const Point &pt) {
+            xval=pt.xval;
+            yval=pt.yval;
+            zval=pt.zval;
+            return *this;
+        }
+        friend const Point& operator[](Point pt) const;
+        
+};
+ostream& operator<<(ostream &out, const Point &pt) {
+        out << "("<< pt.xval << "," << pt.yval << "," << pt.zval << ")"<<endl;
+        return out;
+}
+Point operator+(Point pt1, Point pt2) { 
+        return Point((pt1.xval+pt2.xval), (pt1.yval+pt2.yval), (pt1.zval+pt2.zval));
+}
+const Point& operator[](Point pt) const {
+
+}
+
+int main () {
+    Point pt1(2,3,4);
+    pt1.print();
+    Point pt2(5,6,7);
+    Point pt3;
+    pt3 = pt2;
+    cout << "pt1: " << pt1 << endl;
+    cout << "pt2: " << pt2 << endl;
+    cout << "pt3: " << pt3 << endl;
+    cout << "pt1 + pt2 = " << pt1 + pt2 << endl;
+    return 0;
+}
+
