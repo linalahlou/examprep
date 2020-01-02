@@ -16,7 +16,6 @@ int main () {
         cin >> user1.firstName;
     } while (user1.firstName.find_first_of("0123456789")!=std::string::npos);
         
-    
     cout<< "Enter your last name: ";
     cin >> user1.lastName;
     cout<< "Enter your age (years): ";
