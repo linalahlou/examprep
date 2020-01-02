@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <algorithm>
 using namespace std; 
 
 //{}
@@ -9,25 +10,50 @@ struct compound {
     string formula;
     double weight; 
 };
-
+bool compareByWeight(compound cmp1 , compound cmp2);
 int main () {
     ifstream fin;
     string line;
     string name;
-    compound cmp1;
+    string formula;
+    double weight;
+    compound cmps[27];
+    int i=0;
     fin.open("compounds.sdf");
     if (!fin.fail()) {
-        while ( getline (fin, line) ) {
+            while (getline (fin, line)) {
               size_t found = line.find("PUBCHEM_IUPAC_OPENEYE_NAME");
-              if (found== string::npos){
+              if (found==string::npos){
                   continue;
-              }
-              cout << line << endl;
+              } 
+              //cout << "Compound " << i+1 << " :" << endl;
               getline(fin, name);
-              cmp1.name=name;
-              cout << cmp1.name << endl;
-              break;       
-        } fin.close();
+              cmps[i].name=name;
+              //cout << cmps[i].name << endl;
+              while (line.find("PUBCHEM_MOLECULAR_FORMULA") == string::npos ) {getline(fin, line); }
+                getline(fin, formula);
+                cmps[i].formula=formula;
+                //cout << cmps[i].formula << endl;  
+                while ( line.find("PUBCHEM_MOLECULAR_WEIGHT") == string::npos ) {getline(fin, line); }
+                    fin >> weight; 
+                    cmps[i].weight=weight;
+                    //cout << cmps[i].weight << endl; 
+                    i++;
+                    
+        } 
+        sort(cmps, cmps+27, compareByWeight);
+        for (int j=0;j>27; j++) {
+            cout << "Compound "<< j+1 << " :" << endl;
+            cout<<cmps[j].name<<endl;
+            cout<<cmps[j].formula<<endl;
+            cout<<cmps[j].weight<<endl;
+        }
+        fin.close();
     } else cout << "Unable to open file"; 
     return 0;
+}
+
+bool compareByWeight(compound cmp1, compound cmp2)
+{
+    return cmp1.weight<cmp2.weight;
 }
