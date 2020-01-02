@@ -1,0 +1,28 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+struct user {
+    string firstName; 
+    string lastName;
+    int age;
+    float weight;
+};
+
+int main () {
+    user user1;
+    do {cout<< "Enter your first name: ";
+        cin >> user1.firstName;
+    } while (user1.firstName.find_first_of("0123456789")!=std::string::npos);
+        
+    
+    cout<< "Enter your last name: ";
+    cin >> user1.lastName;
+    cout<< "Enter your age (years): ";
+    cin >> user1.age;
+    cout<< "Enter your weight (kg): ";
+    cin >> user1.weight;
+    cout << user1.firstName << " "<<user1.lastName << ", you are "<< user1.age << " years old and weight "<< user1.weight << " kilograms."<<endl;
+    return 0;
+}
