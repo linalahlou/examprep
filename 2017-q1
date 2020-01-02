@@ -34,5 +34,6 @@ char printBoard (char board[2][3]) {
         cout << "|"<<endl;
     }
     cout << "\t-------\n";
+    
     return 0;
 }
