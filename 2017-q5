@@ -1,0 +1,40 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <vector>
+#include <sstream>
+using namespace std;
+
+void printProt (vector <string> prot);
+
+struct AA {
+    string codon;
+    string threeLet;
+    string oneLet;
+    string name;
+};
+
+int main () {
+    ifstream fin;
+    string sepLine=" ";
+    fin.open("dna2protein.csv");
+    vector <string> prot;
+    int count=0;
+    if (!fin.fail()) {
+        while (getline(fin,sepLine, ',')) {
+            prot.push_back(sepLine);
+        }
+    }
+    printProt(prot);
+    return 0;
+}
+
+void printProt (vector <string> prot) {
+cout << "vector: " <<endl;
+    for (int i=0; i<prot.size(); i++) {
+        if ((i%5==0) ||(i%5==1)) {
+            cout << prot[i];
+        } else cout << prot[i] << " ";
+    }
+}
+
