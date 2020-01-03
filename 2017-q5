@@ -5,36 +5,67 @@
 #include <sstream>
 using namespace std;
 
-void printProt (vector <string> prot);
 
 struct AA {
-    string codon;
-    string threeLet;
-    string oneLet;
+    char codon[3];
+    string tLet;
+    string oLet;
     string name;
 };
+class Prot {
+    private:
+        vector <AA> prot;
+    public:
+        void print();
+        void load();
+
+};
+
 
 int main () {
-    ifstream fin;
-    string sepLine=" ";
-    fin.open("dna2protein.csv");
-    vector <string> prot;
-    int count=0;
-    if (!fin.fail()) {
-        while (getline(fin,sepLine, ',')) {
-            prot.push_back(sepLine);
-        }
-    }
-    printProt(prot);
+    Prot ref;
+    ref.load();
+    ref.print();
     return 0;
 }
 
-void printProt (vector <string> prot) {
-cout << "vector: " <<endl;
+void Prot::print () {
+    cout << "vector: " <<endl;
     for (int i=0; i<prot.size(); i++) {
-        if ((i%5==0) ||(i%5==1)) {
-            cout << prot[i];
-        } else cout << prot[i] << " ";
+        cout << prot[i].codon << " " << prot[i].tLet << " "<< prot[i].oLet << " " << prot[i].name<< endl;
     }
 }
 
+void Prot::load() {
+    AA a1;
+    ifstream fin;
+    string line;
+    string str1;
+    string str2;
+    string str3;
+    string str4;
+    string str5;
+    string str6;
+    fin.open("dna2protein.csv");
+    if (!fin.fail()) {
+        while (!fin.eof()) {
+            getline(fin, line);
+            stringstream sin(line);
+            getline(sin,str1,',');
+            getline(sin,str2,',');
+            getline(sin,str3,',');
+            getline(sin,str4,',');
+            getline(sin,str5,',');
+            getline(sin,str6,',');
+
+            a1.codon[0]=str1[0];
+            a1.codon[1]=str2[0];
+            a1.codon[2]=str3[0];
+            a1.tLet=str4;
+            a1.oLet=str5[0];
+            a1.name=str6;
+
+            prot.push_back(a1);
+        }
+    }
+}
