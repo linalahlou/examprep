@@ -9,16 +9,21 @@ using namespace std;
 struct AA {
     char codon[3];
     string tLet;
-    string oLet;
+    char oLet;
     string name;
 };
+
 class Prot {
     private:
         vector <AA> prot;
+        vector <char> seq;
     public:
         void print();
         void load();
-
+        void ask_storeseq();
+        void printoLet();
+        void printtLet();
+        void printDNA();
 };
 
 
@@ -26,6 +31,10 @@ int main () {
     Prot ref;
     ref.load();
     ref.print();
+    ref.ask_storeseq();
+    ref.printoLet();
+    ref.printtLet();
+    ref.printDNA();
     return 0;
 }
 
@@ -68,4 +77,44 @@ void Prot::load() {
             prot.push_back(a1);
         }
     }
+}
+
+void Prot::ask_storeseq() {
+    string input;
+    cout << "Enter a Protein sequence:" << endl;
+    cout << ">";
+    cin >> input;
+    for (int i=0; i<input.size(); i++) {
+        seq.push_back(input[i]);
+    }
+}
+void Prot::printoLet() {
+    cout << "1-letter AA code: ";
+    for (auto it=seq.begin(); it!=seq.end(); it++) {
+        cout << *it;
+    }
+    cout << endl;
+}
+void Prot::printtLet() {
+    cout << "3-letter AA code: ";
+    for (int i=0; i<seq.size(); i++) {
+        for (int j=0; j<prot.size();j++) {
+            if (seq[i]==prot[j].oLet) {
+                cout << prot[j].tLet << " ";
+                break;
+            }
+        }
+    } cout << endl;
+}
+
+void Prot::printDNA() {
+    cout << "3-letter DNA code: ";
+    for (int i=0; i<seq.size(); i++) {
+        for (int j=0; j<prot.size();j++) {
+            if (seq[i]==prot[j].oLet) {
+                cout << prot[j].codon << " ";
+                break;
+            }
+        }
+    } cout << endl;
 }
